@@ -64,8 +64,10 @@ function findLessonMessages(lesson_id) {
 }
 
 async function addMessage(message, lesson_id) {
-  const [id] = await db("messages").where({ lesson_id }).insert(message);
-  return findMessageById(id);
+  return await db("messages").where({ lesson_id }).insert(message, ["id"]); // for heroku
+  //for localhost
+  // const [id] = await db("messages").where({ lesson_id }).insert(message);
+  // return findMessageById(id);
 }
 
 function removeMessage(id) {
